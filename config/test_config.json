@@ -1,0 +1,28 @@
+{
+  "models": [
+    {
+      "model_name": "gpt-3.5-turbo",
+      "base_url": "https://api.openai.com/v1",
+      "api_key": "dummy-api-key"
+    }
+  ],
+  "tests": [
+    {
+      "name": "short_prompt",
+      "input": "Explain the concept of machine learning in one paragraph.",
+      "expected_output_tokens": 100
+    },
+    {
+      "name": "medium_prompt",
+      "input": "Write a short essay about the impact of artificial intelligence on society.",
+      "expected_output_tokens": 300
+    }
+  ],
+  "concurrency": [1, 2],
+  "total_requests": 5,
+  "output": {
+    "json_output": "test_results.json",
+    "word_report": "test_report.docx",
+    "automated_analysis": true
+  }
+}

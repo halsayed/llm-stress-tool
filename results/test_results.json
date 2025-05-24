@@ -1,0 +1,338 @@
+{
+  "models": [
+    {
+      "model_name": "gpt-3.5-turbo",
+      "base_url": "https://api.openai.com/v1"
+    }
+  ],
+  "tests": [
+    {
+      "name": "short_prompt",
+      "input": "Explain the concept of machine learning in one paragraph.",
+      "expected_output_tokens": 100
+    },
+    {
+      "name": "medium_prompt",
+      "input": "Write a short essay about the impact of artificial intelligence on society.",
+      "expected_output_tokens": 300
+    }
+  ],
+  "concurrency_levels": [
+    1,
+    2
+  ],
+  "total_requests": 5,
+  "results": [
+    {
+      "model_name": "gpt-3.5-turbo",
+      "test_results": [
+        {
+          "test_name": "short_prompt",
+          "concurrency_results": [
+            {
+              "concurrency": 1,
+              "request_results": [
+                {
+                  "success": true,
+                  "latency": 0.6127000000000001,
+                  "input_tokens": 14,
+                  "output_tokens": 100,
+                  "tokens_per_second": 163.2120124041129,
+                  "test_name": "short_prompt",
+                  "request_id": 0,
+                  "response_text": "Mock response for test short_prompt, request 0"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6127000000000001,
+                  "input_tokens": 14,
+                  "output_tokens": 100,
+                  "tokens_per_second": 163.2120124041129,
+                  "test_name": "short_prompt",
+                  "request_id": 1,
+                  "response_text": "Mock response for test short_prompt, request 1"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6127000000000001,
+                  "input_tokens": 14,
+                  "output_tokens": 100,
+                  "tokens_per_second": 163.2120124041129,
+                  "test_name": "short_prompt",
+                  "request_id": 2,
+                  "response_text": "Mock response for test short_prompt, request 2"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6127000000000001,
+                  "input_tokens": 14,
+                  "output_tokens": 100,
+                  "tokens_per_second": 163.2120124041129,
+                  "test_name": "short_prompt",
+                  "request_id": 3,
+                  "response_text": "Mock response for test short_prompt, request 3"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6127000000000001,
+                  "input_tokens": 14,
+                  "output_tokens": 100,
+                  "tokens_per_second": 163.2120124041129,
+                  "test_name": "short_prompt",
+                  "request_id": 4,
+                  "response_text": "Mock response for test short_prompt, request 4"
+                }
+              ],
+              "llmperf_results": {
+                "success": true,
+                "throughput": 1.6321201240411292,
+                "avg_latency": 0.6127000000000001,
+                "p50_latency": 0.5514300000000001,
+                "p90_latency": 0.9190500000000001,
+                "p99_latency": 1.2254000000000003,
+                "tokens_per_second": 163.2120124041129,
+                "total_tokens": 500,
+                "successful_requests": 5,
+                "failed_requests": 0
+              },
+              "summary": {
+                "success_rate": 1.0,
+                "avg_latency": 0.6127000000000001,
+                "avg_tokens_per_second": 163.2120124041129,
+                "total_requests": 5,
+                "successful_requests": 5
+              }
+            },
+            {
+              "concurrency": 2,
+              "request_results": [
+                {
+                  "success": true,
+                  "latency": 0.6684,
+                  "input_tokens": 14,
+                  "output_tokens": 100,
+                  "tokens_per_second": 149.61101137043687,
+                  "test_name": "short_prompt",
+                  "request_id": 0,
+                  "response_text": "Mock response for test short_prompt, request 0"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6684,
+                  "input_tokens": 14,
+                  "output_tokens": 100,
+                  "tokens_per_second": 149.61101137043687,
+                  "test_name": "short_prompt",
+                  "request_id": 1,
+                  "response_text": "Mock response for test short_prompt, request 1"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6684,
+                  "input_tokens": 14,
+                  "output_tokens": 100,
+                  "tokens_per_second": 149.61101137043687,
+                  "test_name": "short_prompt",
+                  "request_id": 2,
+                  "response_text": "Mock response for test short_prompt, request 2"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6684,
+                  "input_tokens": 14,
+                  "output_tokens": 100,
+                  "tokens_per_second": 149.61101137043687,
+                  "test_name": "short_prompt",
+                  "request_id": 3,
+                  "response_text": "Mock response for test short_prompt, request 3"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6684,
+                  "input_tokens": 14,
+                  "output_tokens": 100,
+                  "tokens_per_second": 149.61101137043687,
+                  "test_name": "short_prompt",
+                  "request_id": 4,
+                  "response_text": "Mock response for test short_prompt, request 4"
+                }
+              ],
+              "llmperf_results": {
+                "success": true,
+                "throughput": 2.9922202274087373,
+                "avg_latency": 0.6684,
+                "p50_latency": 0.60156,
+                "p90_latency": 1.0026,
+                "p99_latency": 1.3368,
+                "tokens_per_second": 299.22202274087374,
+                "total_tokens": 500,
+                "successful_requests": 5,
+                "failed_requests": 0
+              },
+              "summary": {
+                "success_rate": 1.0,
+                "avg_latency": 0.6684,
+                "avg_tokens_per_second": 149.61101137043687,
+                "total_requests": 5,
+                "successful_requests": 5
+              }
+            }
+          ]
+        },
+        {
+          "test_name": "medium_prompt",
+          "concurrency_results": [
+            {
+              "concurrency": 1,
+              "request_results": [
+                {
+                  "success": true,
+                  "latency": 0.6325,
+                  "input_tokens": 18,
+                  "output_tokens": 300,
+                  "tokens_per_second": 474.30830039525694,
+                  "test_name": "medium_prompt",
+                  "request_id": 0,
+                  "response_text": "Mock response for test medium_prompt, request 0"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6325,
+                  "input_tokens": 18,
+                  "output_tokens": 300,
+                  "tokens_per_second": 474.30830039525694,
+                  "test_name": "medium_prompt",
+                  "request_id": 1,
+                  "response_text": "Mock response for test medium_prompt, request 1"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6325,
+                  "input_tokens": 18,
+                  "output_tokens": 300,
+                  "tokens_per_second": 474.30830039525694,
+                  "test_name": "medium_prompt",
+                  "request_id": 2,
+                  "response_text": "Mock response for test medium_prompt, request 2"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6325,
+                  "input_tokens": 18,
+                  "output_tokens": 300,
+                  "tokens_per_second": 474.30830039525694,
+                  "test_name": "medium_prompt",
+                  "request_id": 3,
+                  "response_text": "Mock response for test medium_prompt, request 3"
+                },
+                {
+                  "success": true,
+                  "latency": 0.6325,
+                  "input_tokens": 18,
+                  "output_tokens": 300,
+                  "tokens_per_second": 474.30830039525694,
+                  "test_name": "medium_prompt",
+                  "request_id": 4,
+                  "response_text": "Mock response for test medium_prompt, request 4"
+                }
+              ],
+              "llmperf_results": {
+                "success": true,
+                "throughput": 1.58102766798419,
+                "avg_latency": 0.6325,
+                "p50_latency": 0.5692499999999999,
+                "p90_latency": 0.94875,
+                "p99_latency": 1.265,
+                "tokens_per_second": 158.102766798419,
+                "total_tokens": 500,
+                "successful_requests": 5,
+                "failed_requests": 0
+              },
+              "summary": {
+                "success_rate": 1.0,
+                "avg_latency": 0.6325,
+                "avg_tokens_per_second": 474.3083003952569,
+                "total_requests": 5,
+                "successful_requests": 5
+              }
+            },
+            {
+              "concurrency": 2,
+              "request_results": [
+                {
+                  "success": true,
+                  "latency": 0.69,
+                  "input_tokens": 18,
+                  "output_tokens": 300,
+                  "tokens_per_second": 434.7826086956522,
+                  "test_name": "medium_prompt",
+                  "request_id": 0,
+                  "response_text": "Mock response for test medium_prompt, request 0"
+                },
+                {
+                  "success": true,
+                  "latency": 0.69,
+                  "input_tokens": 18,
+                  "output_tokens": 300,
+                  "tokens_per_second": 434.7826086956522,
+                  "test_name": "medium_prompt",
+                  "request_id": 1,
+                  "response_text": "Mock response for test medium_prompt, request 1"
+                },
+                {
+                  "success": true,
+                  "latency": 0.69,
+                  "input_tokens": 18,
+                  "output_tokens": 300,
+                  "tokens_per_second": 434.7826086956522,
+                  "test_name": "medium_prompt",
+                  "request_id": 2,
+                  "response_text": "Mock response for test medium_prompt, request 2"
+                },
+                {
+                  "success": true,
+                  "latency": 0.69,
+                  "input_tokens": 18,
+                  "output_tokens": 300,
+                  "tokens_per_second": 434.7826086956522,
+                  "test_name": "medium_prompt",
+                  "request_id": 3,
+                  "response_text": "Mock response for test medium_prompt, request 3"
+                },
+                {
+                  "success": true,
+                  "latency": 0.69,
+                  "input_tokens": 18,
+                  "output_tokens": 300,
+                  "tokens_per_second": 434.7826086956522,
+                  "test_name": "medium_prompt",
+                  "request_id": 4,
+                  "response_text": "Mock response for test medium_prompt, request 4"
+                }
+              ],
+              "llmperf_results": {
+                "success": true,
+                "throughput": 2.8985507246376816,
+                "avg_latency": 0.69,
+                "p50_latency": 0.621,
+                "p90_latency": 1.035,
+                "p99_latency": 1.38,
+                "tokens_per_second": 289.8550724637681,
+                "total_tokens": 500,
+                "successful_requests": 5,
+                "failed_requests": 0
+              },
+              "summary": {
+                "success_rate": 1.0,
+                "avg_latency": 0.69,
+                "avg_tokens_per_second": 434.7826086956522,
+                "total_requests": 5,
+                "successful_requests": 5
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
