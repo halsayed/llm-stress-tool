@@ -17,7 +17,15 @@ class ConfigHandler:
         """
         self.config_path = config_path
         self.config = self._load_config()
+        self._apply_env_overrides()
         self._validate_config()
+
+    def _apply_env_overrides(self) -> None:
+        """Override configuration values using environment variables."""
+        env_api_key = os.getenv("OPENAI_API_KEY")
+        if env_api_key:
+            for model in self.config.get("models", []):
+                model["api_key"] = env_api_key
         
     def _load_config(self) -> Dict[str, Any]:
         """
