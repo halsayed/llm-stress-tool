@@ -196,17 +196,30 @@ class ReportGenerator:
             title: Chart title
             save_path: Path to save the chart
         """
+        plt.style.use("ggplot")
         plt.figure(figsize=(10, 6))
-        
-        # Create line plot
-        for test_name, group in df.groupby(hue_col):
-            plt.plot(group[x_col], group[y_col], marker='o', linewidth=2, label=test_name)
-        
-        plt.title(title, fontsize=14)
+
+        colors = plt.cm.tab10.colors
+        markers = ['o', 's', '^', 'D', 'v', 'P', '*', 'X', '<', '>']
+
+        # Create line plot with enhanced styling
+        for idx, (test_name, group) in enumerate(df.groupby(hue_col)):
+            color = colors[idx % len(colors)]
+            marker = markers[idx % len(markers)]
+            plt.plot(
+                group[x_col],
+                group[y_col],
+                marker=marker,
+                linewidth=2,
+                label=test_name,
+                color=color,
+            )
+
+        plt.title(title, fontsize=14, fontweight="bold")
         plt.xlabel(x_col, fontsize=12)
         plt.ylabel(y_col, fontsize=12)
-        plt.grid(True, linestyle='--', alpha=0.7)
-        plt.legend()
+        plt.grid(True, linestyle="--", linewidth=0.5, alpha=0.7)
+        plt.legend(frameon=False)
         plt.tight_layout()
         
         # Save the chart

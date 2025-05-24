@@ -136,7 +136,8 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Create mock modules
-with open('/home/ubuntu/llm_stress_tool/src/mock_imports.py', 'w') as f:
+mock_imports_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mock_imports.py")
+with open(mock_imports_path, 'w') as f:
     f.write("""
 import sys
 from unittest.mock import MagicMock
