@@ -64,6 +64,10 @@ Create a JSON configuration file with the following structure:
 }
 ```
 
+You can also set the environment variable `OPENAI_API_KEY` to override the
+`api_key` values in the configuration file. This allows sharing configuration
+files without including secrets.
+
 ## Usage
 
 ```bash
