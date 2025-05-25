@@ -17,7 +17,7 @@ Concurrent requests are executed using Ray tasks running on your local machine, 
 ## Requirements
 
 - Python 3.8+
-- Required packages: ray, llmperf, matplotlib, pandas, python-docx, tqdm, requests
+- Required packages: ray, llmperf, matplotlib, pandas, python-docx, tqdm, requests, aiohttp
 
 ## Installation
 
@@ -27,7 +27,7 @@ git clone https://github.com/yourusername/llm-stress-tool.git
 cd llm-stress-tool
 
 # Install dependencies
-pip install ray llmperf matplotlib pandas python-docx tqdm requests
+pip install ray llmperf matplotlib pandas python-docx tqdm requests aiohttp
 ```
 
 ## Configuration
