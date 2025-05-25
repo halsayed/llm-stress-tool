@@ -62,17 +62,17 @@ class MetricsAnalyzer:
             for test_result in model_result['test_results']:
                 for concurrency_result in test_result['concurrency_results']:
                     summary = concurrency_result['summary']
-                    all_latencies.append(summary['avg_latency'])
+                    all_latencies.append(summary['lat_avg'])
                     all_tokens_per_second.append(summary['avg_tokens_per_second'])
-                    throughput = summary.get('total_system_throughput', summary['avg_tokens_per_second'] * concurrency_result['concurrency'])
+                    throughput = summary.get('system_tps', summary['avg_tokens_per_second'] * concurrency_result['concurrency'])
                     all_system_throughput.append(throughput)
                     all_success_rates.append(summary['success_rate'])
         
         # Add observations based on overall statistics
         if all_latencies:
-            avg_latency = np.mean(all_latencies)
+            lat_avg = np.mean(all_latencies)
             analysis['general_observations'].append(
-                f"Average latency across all tests: {avg_latency:.3f} seconds."
+                f"Average latency across all tests: {lat_avg:.3f} seconds."
             )
         
         if all_tokens_per_second:
@@ -115,24 +115,24 @@ class MetricsAnalyzer:
             for test_result in model_result['test_results']:
                 for concurrency_result in test_result['concurrency_results']:
                     summary = concurrency_result['summary']
-                    model_latencies.append(summary['avg_latency'])
+                    model_latencies.append(summary['lat_avg'])
                     model_tokens_per_second.append(summary['avg_tokens_per_second'])
             
             if model_latencies and model_tokens_per_second:
                 model_metrics[model_name] = {
-                    'avg_latency': np.mean(model_latencies),
+                    'lat_avg': np.mean(model_latencies),
                     'avg_tokens_per_second': np.mean(model_tokens_per_second)
                 }
         
         # Compare models
         if len(model_metrics) > 1:
             # Find best performing model for latency
-            best_latency_model = min(model_metrics.items(), key=lambda x: x[1]['avg_latency'])
-            worst_latency_model = max(model_metrics.items(), key=lambda x: x[1]['avg_latency'])
+            best_latency_model = min(model_metrics.items(), key=lambda x: x[1]['lat_avg'])
+            worst_latency_model = max(model_metrics.items(), key=lambda x: x[1]['lat_avg'])
             
             analysis['model_comparisons'].append(
-                f"{best_latency_model[0]} has the lowest average latency ({best_latency_model[1]['avg_latency']:.3f} seconds), "
-                f"while {worst_latency_model[0]} has the highest ({worst_latency_model[1]['avg_latency']:.3f} seconds)."
+                f"{best_latency_model[0]} has the lowest average latency ({best_latency_model[1]['lat_avg']:.3f} seconds), "
+                f"while {worst_latency_model[0]} has the highest ({worst_latency_model[1]['lat_avg']:.3f} seconds)."
             )
             
             # Find best performing model for tokens per second
@@ -145,7 +145,7 @@ class MetricsAnalyzer:
             )
             
             # Calculate performance difference
-            latency_diff_pct = ((worst_latency_model[1]['avg_latency'] / best_latency_model[1]['avg_latency']) - 1) * 100
+            latency_diff_pct = ((worst_latency_model[1]['lat_avg'] / best_latency_model[1]['lat_avg']) - 1) * 100
             tokens_diff_pct = ((best_tokens_model[1]['avg_tokens_per_second'] / worst_tokens_model[1]['avg_tokens_per_second']) - 1) * 100
             
             analysis['model_comparisons'].append(
@@ -180,9 +180,9 @@ class MetricsAnalyzer:
                     concurrency = concurrency_result['concurrency']
                     summary = concurrency_result['summary']
                     
-                    concurrency_metrics[concurrency]['latencies'].append(summary['avg_latency'])
+                    concurrency_metrics[concurrency]['latencies'].append(summary['lat_avg'])
                     concurrency_metrics[concurrency]['tokens_per_second'].append(summary['avg_tokens_per_second'])
-                    throughput = summary.get('total_system_throughput', summary['avg_tokens_per_second'] * concurrency)
+                    throughput = summary.get('system_tps', summary['avg_tokens_per_second'] * concurrency)
                     concurrency_metrics[concurrency]['system_throughput'].append(throughput)
         
         # Calculate averages for each concurrency level
@@ -190,7 +190,7 @@ class MetricsAnalyzer:
         for concurrency, metrics in concurrency_metrics.items():
             if metrics['latencies'] and metrics['tokens_per_second']:
                 concurrency_averages[concurrency] = {
-                    'avg_latency': np.mean(metrics['latencies']),
+                    'lat_avg': np.mean(metrics['latencies']),
                     'avg_tokens_per_second': np.mean(metrics['tokens_per_second']),
                     'avg_system_throughput': np.mean(metrics['system_throughput'])
                 }
@@ -201,8 +201,8 @@ class MetricsAnalyzer:
             lowest_concurrency = sorted_concurrency[0]
             highest_concurrency = sorted_concurrency[-1]
             
-            latency_change = concurrency_averages[highest_concurrency]['avg_latency'] - concurrency_averages[lowest_concurrency]['avg_latency']
-            latency_change_pct = (latency_change / concurrency_averages[lowest_concurrency]['avg_latency']) * 100
+            latency_change = concurrency_averages[highest_concurrency]['lat_avg'] - concurrency_averages[lowest_concurrency]['lat_avg']
+            latency_change_pct = (latency_change / concurrency_averages[lowest_concurrency]['lat_avg']) * 100
             
             if latency_change_pct > 10:
                 analysis['concurrency_impact'].append(
@@ -310,7 +310,7 @@ class MetricsAnalyzer:
                         concurrency = concurrency_result['concurrency']
                         summary = concurrency_result['summary']
                         
-                        concurrency_metrics[concurrency]['latencies'].append(summary['avg_latency'])
+                        concurrency_metrics[concurrency]['latencies'].append(summary['lat_avg'])
                         concurrency_metrics[concurrency]['tokens_per_second'].append(summary['avg_tokens_per_second'])
             
             # Calculate averages for each concurrency level
@@ -318,7 +318,7 @@ class MetricsAnalyzer:
             for concurrency, metrics in concurrency_metrics.items():
                 if metrics['latencies'] and metrics['tokens_per_second']:
                     concurrency_averages[concurrency] = {
-                        'avg_latency': np.mean(metrics['latencies']),
+                        'lat_avg': np.mean(metrics['latencies']),
                         'avg_tokens_per_second': np.mean(metrics['tokens_per_second'])
                     }
             

@@ -35,22 +35,20 @@ class MockLLMTester:
         print(f"[MOCK] Running test '{test['name']}' with concurrency {concurrency} on model {self.model_name}")
         
         results = []
-        
-        # Generate mock results
+
+        # Generate mock results with synthetic timing to emulate concurrency
         for i in range(total_requests):
-            # Simulate varying latency based on concurrency
-            base_latency = 0.5 + (len(test['input']) / 1000)  # Base latency depends on input length
-            concurrency_factor = 1.0 + (concurrency * 0.1)  # Higher concurrency increases latency
+            base_latency = 0.5 + (len(test['input']) / 1000)
+            concurrency_factor = 1.0 + (concurrency * 0.1)
             latency = base_latency * concurrency_factor
-            
-            # Simulate varying token counts
+
+            start_ts = (i // concurrency) * latency
+            end_ts = start_ts + latency
+
             input_tokens = len(test['input']) // 4
             output_tokens = test.get('expected_output_tokens', 100)
-            
-            # Simulate tokens per second
             tokens_per_second = output_tokens / latency
-            
-            # Create result
+
             result = {
                 "success": True,
                 "latency": latency,
@@ -59,9 +57,11 @@ class MockLLMTester:
                 "tokens_per_second": tokens_per_second,
                 "test_name": test['name'],
                 "request_id": i,
-                "response_text": f"Mock response for test {test['name']}, request {i}"
+                "response_text": f"Mock response for test {test['name']}, request {i}",
+                "start_ts": start_ts,
+                "end_ts": end_ts,
             }
-            
+
             results.append(result)
         
         return results

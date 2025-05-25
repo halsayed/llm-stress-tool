@@ -22,6 +22,7 @@ except ImportError:
     from src.llm_tester import LLMTester
     from src.report_generator import ReportGenerator
     from src.metrics_analyzer import MetricsAnalyzer
+    from src.metrics import aggregate_metrics
 
 
 def parse_arguments():
@@ -35,6 +36,8 @@ def parse_arguments():
                         help='Skip generating Word report')
     parser.add_argument('--no-analysis', action='store_true',
                         help='Skip automated analysis')
+    parser.add_argument('--warmup', type=int, default=3,
+                        help='Number of warmup iterations to skip in metrics')
     
     return parser.parse_args()
 
@@ -46,7 +49,7 @@ def ensure_output_directory(output_dir: str) -> None:
         print(f"Created output directory: {output_dir}")
 
 
-def run_tests(config_handler: ConfigHandler, output_dir: str) -> Dict[str, Any]:
+def run_tests(config_handler: ConfigHandler, output_dir: str, warmup: int) -> Dict[str, Any]:
     """
     Run all tests according to configuration.
     
@@ -103,12 +106,11 @@ def run_tests(config_handler: ConfigHandler, output_dir: str) -> Dict[str, Any]:
                 
                 # Run test once with LLMTester
                 results = tester.run_test(test, concurrency, total_requests)
-                
-                # Combine results
+
                 concurrency_result = {
                     "concurrency": concurrency,
                     "request_results": results,
-                    "summary": calculate_summary(results, concurrency)
+                    "summary": calculate_summary(results, warmup, concurrency)
                 }
                 
                 test_results["concurrency_results"].append(concurrency_result)
@@ -129,60 +131,11 @@ def run_tests(config_handler: ConfigHandler, output_dir: str) -> Dict[str, Any]:
     return all_results
 
 
-def calculate_summary(results: List[Dict[str, Any]], concurrency: int) -> Dict[str, Any]:
-    """
-    Calculate summary statistics from test results.
-    
-    Args:
-        results: List of test result dictionaries
-        
-    Returns:
-        Dictionary with summary statistics
-    """
-    successful_results = [r for r in results if r.get("success", False)]
-    
-    if not successful_results:
-        return {
-            "success_rate": 0,
-            "avg_latency": 0,
-            "avg_tokens_per_second": 0,
-            "total_requests": len(results),
-            "successful_requests": 0
-        }
-    
-    total_requests = len(results)
-    successful_requests = len(successful_results)
-    
-    avg_latency = sum(r["latency"] for r in successful_results) / successful_requests
-    avg_tokens_per_second = sum(r.get("tokens_per_second", 0) for r in successful_results) / successful_requests
-
-    # Calculate latency percentiles and throughput
-    latencies = sorted(r["latency"] for r in successful_results)
-    p50_index = int(len(latencies) * 0.5)
-    p90_index = int(len(latencies) * 0.9)
-    p99_index = int(len(latencies) * 0.99)
-
-    p50_latency = latencies[p50_index] if latencies else 0
-    p90_latency = latencies[p90_index] if latencies else 0
-    p99_latency = latencies[p99_index] if latencies else 0
-
-    total_latency = sum(latencies)
-    throughput = successful_requests / total_latency if total_latency > 0 else 0
-
-    total_system_throughput = avg_tokens_per_second * concurrency
-
-    return {
-        "success_rate": successful_requests / total_requests,
-        "avg_latency": avg_latency,
-        "avg_tokens_per_second": avg_tokens_per_second,
-        "p50_latency": p50_latency,
-        "p90_latency": p90_latency,
-        "p99_latency": p99_latency,
-        "throughput": throughput,
-        "total_system_throughput": total_system_throughput,
-        "total_requests": total_requests,
-        "successful_requests": successful_requests
-    }
+def calculate_summary(results: List[Dict[str, Any]], warmup: int, concurrency: int) -> Dict[str, Any]:
+    """Calculate summary statistics using aggregate_metrics."""
+    summary = aggregate_metrics(results, warmup)
+    summary["concurrency"] = concurrency
+    return summary
 
 
 def main():
@@ -198,7 +151,7 @@ def main():
         config_handler = ConfigHandler(args.config)
         
         # Run tests
-        all_results = run_tests(config_handler, args.output_dir)
+        all_results = run_tests(config_handler, args.output_dir, args.warmup)
         
         # Generate report if not disabled
         if not args.no_report:
