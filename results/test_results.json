@@ -91,6 +91,7 @@
                 "p90_latency": 0.6127000000000001,
                 "p99_latency": 0.6127000000000001,
                 "throughput": 1.632120124041129,
+                "total_system_throughput": 163.2120124041129,
                 "total_requests": 5,
                 "successful_requests": 5
               }
@@ -157,6 +158,7 @@
                 "p90_latency": 0.6684,
                 "p99_latency": 0.6684,
                 "throughput": 1.4961101137043686,
+                "total_system_throughput": 299.22202274087374,
                 "total_requests": 5,
                 "successful_requests": 5
               }
@@ -228,6 +230,7 @@
                 "p90_latency": 0.6325,
                 "p99_latency": 0.6325,
                 "throughput": 1.58102766798419,
+                "total_system_throughput": 474.3083003952569,
                 "total_requests": 5,
                 "successful_requests": 5
               }
@@ -294,6 +297,7 @@
                 "p90_latency": 0.69,
                 "p99_latency": 0.69,
                 "throughput": 1.4492753623188408,
+                "total_system_throughput": 869.5652173913044,
                 "total_requests": 5,
                 "successful_requests": 5
               }

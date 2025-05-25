@@ -2,7 +2,7 @@
 
 ## Overview
 
-This tool allows you to benchmark the performance of LLM endpoints using the OpenAI API format. It measures key metrics such as tokens/second, latency, and throughput under various load conditions.
+This tool allows you to benchmark the performance of LLM endpoints using the OpenAI API format. It measures key metrics such as tokens/second, total system throughput, and latency under various load conditions.
 Concurrent requests are executed using Ray tasks running on your local machine, so you don't need a separate Ray cluster.
 
 ## Features
@@ -93,12 +93,13 @@ The tool generates:
 2. A Word document report with:
    - Test configuration details
    - Performance metrics tables
-   - Visualizations of latency and tokens/second
+   - Visualizations of latency, tokens/second, and total system throughput
    - Optional automated analysis
 
 ## Interpreting Results
 
 - **Tokens/second**: Higher is better, indicates throughput capacity
+- **Total system throughput**: Tokens/second multiplied by concurrency. Example: `100 concurrency * 31.83 tokens/s ≈ 3,183 tokens/s`
 - **Latency**: Lower is better, indicates response time
 - **Success rate**: Higher is better, indicates reliability
 - **Concurrency impact**: Shows how performance scales with concurrent requests

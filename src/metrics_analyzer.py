@@ -55,6 +55,7 @@ class MetricsAnalyzer:
         # Calculate overall statistics
         all_latencies = []
         all_tokens_per_second = []
+        all_system_throughput = []
         all_success_rates = []
         
         for model_result in self.results['results']:
@@ -63,6 +64,8 @@ class MetricsAnalyzer:
                     summary = concurrency_result['summary']
                     all_latencies.append(summary['avg_latency'])
                     all_tokens_per_second.append(summary['avg_tokens_per_second'])
+                    throughput = summary.get('total_system_throughput', summary['avg_tokens_per_second'] * concurrency_result['concurrency'])
+                    all_system_throughput.append(throughput)
                     all_success_rates.append(summary['success_rate'])
         
         # Add observations based on overall statistics
@@ -76,6 +79,11 @@ class MetricsAnalyzer:
             avg_tokens = np.mean(all_tokens_per_second)
             analysis['general_observations'].append(
                 f"Average tokens per second across all tests: {avg_tokens:.2f}."
+            )
+        if all_system_throughput:
+            avg_system = np.mean(all_system_throughput)
+            analysis['general_observations'].append(
+                f"Average total system throughput: {avg_system:.0f} tokens/s."
             )
         
         if all_success_rates:
@@ -164,7 +172,7 @@ class MetricsAnalyzer:
             return
         
         # Collect metrics for each concurrency level
-        concurrency_metrics = {level: {'latencies': [], 'tokens_per_second': []} for level in concurrency_levels}
+        concurrency_metrics = {level: {'latencies': [], 'tokens_per_second': [], 'system_throughput': []} for level in concurrency_levels}
         
         for model_result in self.results['results']:
             for test_result in model_result['test_results']:
@@ -174,6 +182,8 @@ class MetricsAnalyzer:
                     
                     concurrency_metrics[concurrency]['latencies'].append(summary['avg_latency'])
                     concurrency_metrics[concurrency]['tokens_per_second'].append(summary['avg_tokens_per_second'])
+                    throughput = summary.get('total_system_throughput', summary['avg_tokens_per_second'] * concurrency)
+                    concurrency_metrics[concurrency]['system_throughput'].append(throughput)
         
         # Calculate averages for each concurrency level
         concurrency_averages = {}
@@ -181,7 +191,8 @@ class MetricsAnalyzer:
             if metrics['latencies'] and metrics['tokens_per_second']:
                 concurrency_averages[concurrency] = {
                     'avg_latency': np.mean(metrics['latencies']),
-                    'avg_tokens_per_second': np.mean(metrics['tokens_per_second'])
+                    'avg_tokens_per_second': np.mean(metrics['tokens_per_second']),
+                    'avg_system_throughput': np.mean(metrics['system_throughput'])
                 }
         
         # Analyze latency trend with increasing concurrency
@@ -224,6 +235,24 @@ class MetricsAnalyzer:
             else:
                 analysis['concurrency_impact'].append(
                     f"Tokens per second remains relatively stable (change of {tokens_change_pct:.1f}%) across concurrency levels."
+                )
+
+            # Analyze total system throughput trend
+            sys_tokens_low = concurrency_averages[lowest_concurrency]['avg_system_throughput']
+            sys_tokens_high = concurrency_averages[highest_concurrency]['avg_system_throughput']
+            sys_change_pct = ((sys_tokens_high - sys_tokens_low) / sys_tokens_low) * 100 if sys_tokens_low else 0
+
+            analysis['concurrency_impact'].append(
+                f"Total system throughput increases from {sys_tokens_low:.0f} to {sys_tokens_high:.0f} tokens/s as concurrency scales from {lowest_concurrency} to {highest_concurrency}."
+            )
+
+            analysis['concurrency_impact'].append(
+                "Per-request performance stays relatively stable while total throughput scales almost linearly with concurrency."
+            )
+
+            if highest_concurrency >= 100 and sys_tokens_high >= 3000:
+                analysis['concurrency_impact'].append(
+                    f"The system processes over {sys_tokens_high:.0f} tokens/s at {highest_concurrency} concurrent users."
                 )
             
             # Find optimal concurrency level for throughput

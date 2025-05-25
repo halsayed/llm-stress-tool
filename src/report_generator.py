@@ -148,7 +148,8 @@ class ReportGenerator:
                 tokens_per_second_data.append({
                     'Test': test_name,
                     'Concurrency': concurrency,
-                    'Tokens/s': summary['avg_tokens_per_second']
+                    'Tokens/s': summary['avg_tokens_per_second'],
+                    'Total Throughput': summary.get('total_system_throughput', summary['avg_tokens_per_second'] * concurrency)
                 })
         
         # Convert to DataFrames
@@ -188,6 +189,42 @@ class ReportGenerator:
             f'{self.charts_dir}/tokens_{safe_model_name}.png',
             width=Inches(6.0)
         )
+
+        # Calculate and plot total system throughput
+        throughput_df = tokens_df.groupby('Concurrency').agg({'Tokens/s': 'mean'}).reset_index()
+        throughput_df['Total Throughput'] = throughput_df['Concurrency'] * throughput_df['Tokens/s']
+        throughput_df['Test'] = 'All Tests'
+
+        # Generate throughput chart
+        self._create_chart(
+            throughput_df,
+            'Concurrency',
+            'Total Throughput',
+            'Test',
+            f'Total System Throughput - {model_name}',
+            f'{self.charts_dir}/throughput_{safe_model_name}.png'
+        )
+
+        # Add throughput chart to document
+        self.document.add_heading("Total System Throughput by Concurrency", level=3)
+        self.document.add_picture(
+            f'{self.charts_dir}/throughput_{safe_model_name}.png',
+            width=Inches(6.0)
+        )
+
+        # Add throughput table
+        throughput_table = self.document.add_table(rows=1, cols=3)
+        throughput_table.style = 'Table Grid'
+        header_cells = throughput_table.rows[0].cells
+        header_cells[0].text = 'Concurrency'
+        header_cells[1].text = 'Tokens/s per Request'
+        header_cells[2].text = 'Total System Throughput'
+
+        for _, row in throughput_df.iterrows():
+            row_cells = throughput_table.add_row().cells
+            row_cells[0].text = str(int(row['Concurrency']))
+            row_cells[1].text = f"{row['Tokens/s']:.2f}"
+            row_cells[2].text = f"{row['Total Throughput']:.2f}"
     
     def _create_chart(self, df: pd.DataFrame, x_col: str, y_col: str, hue_col: str, 
                      title: str, save_path: str) -> None:
