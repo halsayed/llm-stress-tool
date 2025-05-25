@@ -67,65 +67,6 @@ class MockLLMTester:
         return results
 
 
-class MockLLMPerfRunner:
-    """
-    Mock implementation of LLMPerfRunner for testing without actual API calls.
-    """
-    
-    def __init__(self, model_config: Dict[str, str]):
-        """
-        Initialize the mock LLMPerf runner.
-        
-        Args:
-            model_config: Dictionary containing model configuration
-        """
-        self.model_name = model_config['model_name']
-        self.base_url = model_config['base_url']
-        self.api_key = model_config['api_key']
-    
-    def run_benchmark(self, prompt: str, concurrency: int, total_requests: int) -> Dict[str, Any]:
-        """
-        Run a mock benchmark.
-        
-        Args:
-            prompt: Input prompt text
-            concurrency: Number of concurrent requests
-            total_requests: Total number of requests to make
-            
-        Returns:
-            Dictionary with benchmark results
-        """
-        print(f"[MOCK] Running LLMPerf benchmark with concurrency {concurrency} on model {self.model_name}")
-        
-        # Generate mock benchmark results
-        base_latency = 0.5 + (len(prompt) / 1000)
-        concurrency_factor = 1.0 + (concurrency * 0.1)
-        avg_latency = base_latency * concurrency_factor
-        
-        # Calculate mock percentiles
-        p50_latency = avg_latency * 0.9
-        p90_latency = avg_latency * 1.5
-        p99_latency = avg_latency * 2.0
-        
-        # Calculate mock throughput
-        throughput = concurrency / avg_latency
-        
-        # Calculate mock tokens per second
-        output_tokens = 100  # Assume average output tokens
-        tokens_per_second = (output_tokens * total_requests) / (avg_latency * total_requests / concurrency)
-        
-        return {
-            "success": True,
-            "throughput": throughput,
-            "avg_latency": avg_latency,
-            "p50_latency": p50_latency,
-            "p90_latency": p90_latency,
-            "p99_latency": p99_latency,
-            "tokens_per_second": tokens_per_second,
-            "total_tokens": output_tokens * total_requests,
-            "successful_requests": total_requests,
-            "failed_requests": 0
-        }
 
 
 # Mock the imports in main.py
@@ -144,14 +85,12 @@ from unittest.mock import MagicMock
 
 # Create mock modules
 sys.modules['src.llm_tester'] = MagicMock()
-sys.modules['src.llmperf_integration'] = MagicMock()
 
 # Import the mocks from this file
-from src.mock_test import MockLLMTester, MockLLMPerfRunner
+from src.mock_test import MockLLMTester
 
 # Replace the classes in the mocked modules
 sys.modules['src.llm_tester'].LLMTester = MockLLMTester
-sys.modules['src.llmperf_integration'].LLMPerfRunner = MockLLMPerfRunner
 """)
 
 if __name__ == "__main__":

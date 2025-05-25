@@ -14,14 +14,12 @@ try:
     # Try direct imports first (when installed as a package)
     from config_handler import ConfigHandler
     from llm_tester import LLMTester
-    from llmperf_integration import LLMPerfRunner
     from report_generator import ReportGenerator
     from metrics_analyzer import MetricsAnalyzer
 except ImportError:
     # Fall back to fully qualified imports (when run directly)
     from src.config_handler import ConfigHandler
     from src.llm_tester import LLMTester
-    from src.llmperf_integration import LLMPerfRunner
     from src.report_generator import ReportGenerator
     from src.metrics_analyzer import MetricsAnalyzer
 
@@ -85,9 +83,6 @@ def run_tests(config_handler: ConfigHandler, output_dir: str) -> Dict[str, Any]:
         # Initialize tester
         tester = LLMTester(model_config)
         
-        # Initialize LLMPerf runner if available
-        llmperf_runner = LLMPerfRunner(model_config)
-        
         model_results = {
             "model_name": model_name,
             "test_results": []
@@ -106,21 +101,13 @@ def run_tests(config_handler: ConfigHandler, output_dir: str) -> Dict[str, Any]:
             for concurrency in concurrency_levels:
                 print(f"\nConcurrency level: {concurrency}")
                 
-                # Run test with LLMTester
+                # Run test once with LLMTester
                 results = tester.run_test(test, concurrency, total_requests)
-                
-                # Run test with LLMPerf if available
-                llmperf_results = llmperf_runner.run_benchmark(
-                    test["input"], 
-                    concurrency, 
-                    total_requests
-                )
                 
                 # Combine results
                 concurrency_result = {
                     "concurrency": concurrency,
                     "request_results": results,
-                    "llmperf_results": llmperf_results,
                     "summary": calculate_summary(results)
                 }
                 
@@ -168,11 +155,28 @@ def calculate_summary(results: List[Dict[str, Any]]) -> Dict[str, Any]:
     
     avg_latency = sum(r["latency"] for r in successful_results) / successful_requests
     avg_tokens_per_second = sum(r.get("tokens_per_second", 0) for r in successful_results) / successful_requests
-    
+
+    # Calculate latency percentiles and throughput
+    latencies = sorted(r["latency"] for r in successful_results)
+    p50_index = int(len(latencies) * 0.5)
+    p90_index = int(len(latencies) * 0.9)
+    p99_index = int(len(latencies) * 0.99)
+
+    p50_latency = latencies[p50_index] if latencies else 0
+    p90_latency = latencies[p90_index] if latencies else 0
+    p99_latency = latencies[p99_index] if latencies else 0
+
+    total_latency = sum(latencies)
+    throughput = successful_requests / total_latency if total_latency > 0 else 0
+
     return {
         "success_rate": successful_requests / total_requests,
         "avg_latency": avg_latency,
         "avg_tokens_per_second": avg_tokens_per_second,
+        "p50_latency": p50_latency,
+        "p90_latency": p90_latency,
+        "p99_latency": p99_latency,
+        "throughput": throughput,
         "total_requests": total_requests,
         "successful_requests": successful_requests
     }

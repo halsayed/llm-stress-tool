@@ -83,22 +83,14 @@
                   "response_text": "Mock response for test short_prompt, request 4"
                 }
               ],
-              "llmperf_results": {
-                "success": true,
-                "throughput": 1.6321201240411292,
-                "avg_latency": 0.6127000000000001,
-                "p50_latency": 0.5514300000000001,
-                "p90_latency": 0.9190500000000001,
-                "p99_latency": 1.2254000000000003,
-                "tokens_per_second": 163.2120124041129,
-                "total_tokens": 500,
-                "successful_requests": 5,
-                "failed_requests": 0
-              },
               "summary": {
                 "success_rate": 1.0,
                 "avg_latency": 0.6127000000000001,
                 "avg_tokens_per_second": 163.2120124041129,
+                "p50_latency": 0.6127000000000001,
+                "p90_latency": 0.6127000000000001,
+                "p99_latency": 0.6127000000000001,
+                "throughput": 1.632120124041129,
                 "total_requests": 5,
                 "successful_requests": 5
               }
@@ -157,22 +149,14 @@
                   "response_text": "Mock response for test short_prompt, request 4"
                 }
               ],
-              "llmperf_results": {
-                "success": true,
-                "throughput": 2.9922202274087373,
-                "avg_latency": 0.6684,
-                "p50_latency": 0.60156,
-                "p90_latency": 1.0026,
-                "p99_latency": 1.3368,
-                "tokens_per_second": 299.22202274087374,
-                "total_tokens": 500,
-                "successful_requests": 5,
-                "failed_requests": 0
-              },
               "summary": {
                 "success_rate": 1.0,
                 "avg_latency": 0.6684,
                 "avg_tokens_per_second": 149.61101137043687,
+                "p50_latency": 0.6684,
+                "p90_latency": 0.6684,
+                "p99_latency": 0.6684,
+                "throughput": 1.4961101137043686,
                 "total_requests": 5,
                 "successful_requests": 5
               }
@@ -236,22 +220,14 @@
                   "response_text": "Mock response for test medium_prompt, request 4"
                 }
               ],
-              "llmperf_results": {
-                "success": true,
-                "throughput": 1.58102766798419,
-                "avg_latency": 0.6325,
-                "p50_latency": 0.5692499999999999,
-                "p90_latency": 0.94875,
-                "p99_latency": 1.265,
-                "tokens_per_second": 158.102766798419,
-                "total_tokens": 500,
-                "successful_requests": 5,
-                "failed_requests": 0
-              },
               "summary": {
                 "success_rate": 1.0,
                 "avg_latency": 0.6325,
                 "avg_tokens_per_second": 474.3083003952569,
+                "p50_latency": 0.6325,
+                "p90_latency": 0.6325,
+                "p99_latency": 0.6325,
+                "throughput": 1.58102766798419,
                 "total_requests": 5,
                 "successful_requests": 5
               }
@@ -310,22 +286,14 @@
                   "response_text": "Mock response for test medium_prompt, request 4"
                 }
               ],
-              "llmperf_results": {
-                "success": true,
-                "throughput": 2.8985507246376816,
-                "avg_latency": 0.69,
-                "p50_latency": 0.621,
-                "p90_latency": 1.035,
-                "p99_latency": 1.38,
-                "tokens_per_second": 289.8550724637681,
-                "total_tokens": 500,
-                "successful_requests": 5,
-                "failed_requests": 0
-              },
               "summary": {
                 "success_rate": 1.0,
                 "avg_latency": 0.69,
                 "avg_tokens_per_second": 434.7826086956522,
+                "p50_latency": 0.69,
+                "p90_latency": 0.69,
+                "p99_latency": 0.69,
+                "throughput": 1.4492753623188408,
                 "total_requests": 5,
                 "successful_requests": 5
               }
