@@ -97,13 +97,15 @@ class ReportGenerator:
                 self.document.add_heading(f"Test: {test_name}", level=3)
                 
                 # Add summary table
-                summary_table = self.document.add_table(rows=1, cols=4)
+                summary_table = self.document.add_table(rows=1, cols=6)
                 summary_table.style = 'Table Grid'
                 header_cells = summary_table.rows[0].cells
                 header_cells[0].text = 'Concurrency'
                 header_cells[1].text = 'Avg. Latency (s)'
-                header_cells[2].text = 'Tokens/s'
-                header_cells[3].text = 'Success Rate'
+                header_cells[2].text = 'p50 (s)'
+                header_cells[3].text = 'p95 (s)'
+                header_cells[4].text = 'Tokens/s'
+                header_cells[5].text = 'Success Rate'
                 
                 for concurrency_result in test_result['concurrency_results']:
                     concurrency = concurrency_result['concurrency']
@@ -111,9 +113,11 @@ class ReportGenerator:
                     
                     row_cells = summary_table.add_row().cells
                     row_cells[0].text = str(concurrency)
-                    row_cells[1].text = f"{summary['avg_latency']:.3f}"
-                    row_cells[2].text = f"{summary['avg_tokens_per_second']:.2f}"
-                    row_cells[3].text = f"{summary['success_rate'] * 100:.1f}%"
+                    row_cells[1].text = f"{summary['lat_avg']:.3f}"
+                    row_cells[2].text = f"{summary['lat_p50']:.3f}"
+                    row_cells[3].text = f"{summary['lat_p95']:.3f}"
+                    row_cells[4].text = f"{summary['avg_tokens_per_second']:.2f}"
+                    row_cells[5].text = f"{summary['success_rate'] * 100:.1f}%"
         
         # Save the document
         self.document.save(self.output_path)
@@ -140,28 +144,34 @@ class ReportGenerator:
                 summary = concurrency_result['summary']
                 
                 latency_data.append({
-                    'Test': test_name,
+                    'Metric': 'AVG',
                     'Concurrency': concurrency,
-                    'Latency': summary['avg_latency']
+                    'Latency': summary['lat_avg']
                 })
-                
+                latency_data.append({
+                    'Metric': 'P95',
+                    'Concurrency': concurrency,
+                    'Latency': summary['lat_p95']
+                })
+
                 tokens_per_second_data.append({
                     'Test': test_name,
                     'Concurrency': concurrency,
                     'Tokens/s': summary['avg_tokens_per_second'],
-                    'Total Throughput': summary.get('total_system_throughput', summary['avg_tokens_per_second'] * concurrency)
+                    'System Throughput': summary.get('system_tps', summary['avg_tokens_per_second'] * concurrency)
                 })
         
         # Convert to DataFrames
         latency_df = pd.DataFrame(latency_data)
+        latency_df = latency_df.groupby(['Metric', 'Concurrency']).agg({'Latency': 'mean'}).reset_index()
         tokens_df = pd.DataFrame(tokens_per_second_data)
         
         # Generate latency chart
         self._create_chart(
-            latency_df, 
-            'Concurrency', 
-            'Latency', 
-            'Test',
+            latency_df,
+            'Concurrency',
+            'Latency',
+            'Metric',
             f'Latency by Concurrency - {model_name}',
             f'{self.charts_dir}/latency_{safe_model_name}.png'
         )
@@ -191,16 +201,12 @@ class ReportGenerator:
         )
 
         # Calculate and plot total system throughput
-        throughput_df = tokens_df.groupby('Concurrency').agg({'Tokens/s': 'mean'}).reset_index()
-        throughput_df['Total Throughput'] = throughput_df['Concurrency'] * throughput_df['Tokens/s']
+        throughput_df = tokens_df.groupby('Concurrency').agg({'System Throughput': 'mean'}).reset_index()
         throughput_df['Test'] = 'All Tests'
 
         # Generate throughput chart
-        self._create_chart(
+        self._create_throughput_chart(
             throughput_df,
-            'Concurrency',
-            'Total Throughput',
-            'Test',
             f'Total System Throughput - {model_name}',
             f'{self.charts_dir}/throughput_{safe_model_name}.png'
         )
@@ -218,15 +224,16 @@ class ReportGenerator:
         header_cells = throughput_table.rows[0].cells
         header_cells[0].text = 'Concurrency'
         header_cells[1].text = 'Tokens/s per Request'
-        header_cells[2].text = 'Total System Throughput'
+        header_cells[2].text = 'System Throughput'
 
         for _, row in throughput_df.iterrows():
             row_cells = throughput_table.add_row().cells
             row_cells[0].text = str(int(row['Concurrency']))
-            row_cells[1].text = f"{row['Tokens/s']:.2f}"
-            row_cells[2].text = f"{row['Total Throughput']:.2f}"
+            avg_tokens = tokens_df[tokens_df['Concurrency'] == row['Concurrency']]['Tokens/s'].mean()
+            row_cells[1].text = f"{avg_tokens:.2f}"
+            row_cells[2].text = f"{row['System Throughput']:.2f}"
     
-    def _create_chart(self, df: pd.DataFrame, x_col: str, y_col: str, hue_col: str, 
+    def _create_chart(self, df: pd.DataFrame, x_col: str, y_col: str, hue_col: str,
                      title: str, save_path: str) -> None:
         """
         Create and save a chart.
@@ -266,6 +273,22 @@ class ReportGenerator:
         plt.tight_layout()
         
         # Save the chart
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        plt.close()
+
+    def _create_throughput_chart(self, df: pd.DataFrame, title: str, save_path: str) -> None:
+        """Create throughput chart with saturation line."""
+        plt.style.use("ggplot")
+        plt.figure(figsize=(10, 6))
+        plt.plot(df['Concurrency'], df['System Throughput'], marker='o', label='System TPS')
+        max_tps = df['System Throughput'].max()
+        plt.axhline(0.95 * max_tps, linestyle='--', color='red', label='95% of Max')
+        plt.title(title, fontsize=14, fontweight='bold')
+        plt.xlabel('Concurrency', fontsize=12)
+        plt.ylabel('System Throughput', fontsize=12)
+        plt.grid(True, linestyle='--', linewidth=0.5, alpha=0.7)
+        plt.legend(frameon=False)
+        plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
     
