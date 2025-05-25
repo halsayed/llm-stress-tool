@@ -1,13 +1,13 @@
 import time
 from typing import Dict, Any
 
-import aiohttp
+import requests
 import ray
 
 
 @ray.remote
-async def make_request(base_url: str, headers: Dict[str, str], model_name: str, prompt: str) -> Dict[str, Any]:
-    """Asynchronous Ray task to make a single request to the LLM API."""
+def make_request(base_url: str, headers: Dict[str, str], model_name: str, prompt: str) -> Dict[str, Any]:
+    """Ray task to make a single request to the LLM API."""
     endpoint = f"{base_url}/chat/completions"
     payload = {
         "model": model_name,
@@ -18,10 +18,9 @@ async def make_request(base_url: str, headers: Dict[str, str], model_name: str, 
 
     start_time = time.time()
     try:
-        async with aiohttp.ClientSession(headers=headers) as session:
-            async with session.post(endpoint, json=payload) as response:
-                response.raise_for_status()
-                response_data = await response.json()
+        response = requests.post(endpoint, headers=headers, json=payload)
+        response.raise_for_status()
+        response_data = response.json()
 
         end_time = time.time()
         latency = end_time - start_time
