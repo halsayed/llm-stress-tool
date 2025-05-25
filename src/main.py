@@ -16,6 +16,7 @@ try:
     from llm_tester import LLMTester
     from report_generator import ReportGenerator
     from metrics_analyzer import MetricsAnalyzer
+    from metrics import aggregate_metrics
 except ImportError:
     # Fall back to fully qualified imports (when run directly)
     from src.config_handler import ConfigHandler
