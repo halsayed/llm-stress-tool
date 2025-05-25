@@ -4,7 +4,10 @@ from typing import Dict, List, Any
 import requests
 from tqdm import tqdm
 import ray
-from .ray_requests import make_request
+try:
+    from .ray_requests import make_request
+except ImportError:  # Allow running without package context
+    from src.ray_requests import make_request
 
 
 class LLMTester:

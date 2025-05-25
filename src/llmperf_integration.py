@@ -5,7 +5,10 @@ import requests
 import time
 from tqdm import tqdm
 import ray
-from .ray_requests import make_request
+try:
+    from .ray_requests import make_request
+except ImportError:  # Allow running without package context
+    from src.ray_requests import make_request
 
 # Remove the dependency on llmperf.benchmark
 class LLMPerfRunner:
