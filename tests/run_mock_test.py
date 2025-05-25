@@ -10,7 +10,7 @@ from pathlib import Path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import mock modules
-from src.mock_test import MockLLMTester, MockLLMPerfRunner
+from src.mock_test import MockLLMTester
 from src.config_handler import ConfigHandler
 from src.report_generator import ReportGenerator
 from src.metrics_analyzer import MetricsAnalyzer
@@ -56,11 +56,27 @@ def calculate_summary(results):
     
     avg_latency = sum(r["latency"] for r in successful_results) / successful_requests
     avg_tokens_per_second = sum(r.get("tokens_per_second", 0) for r in successful_results) / successful_requests
-    
+
+    latencies = sorted(r["latency"] for r in successful_results)
+    p50_index = int(len(latencies) * 0.5)
+    p90_index = int(len(latencies) * 0.9)
+    p99_index = int(len(latencies) * 0.99)
+
+    p50_latency = latencies[p50_index] if latencies else 0
+    p90_latency = latencies[p90_index] if latencies else 0
+    p99_latency = latencies[p99_index] if latencies else 0
+
+    total_latency = sum(latencies)
+    throughput = successful_requests / total_latency if total_latency > 0 else 0
+
     return {
         "success_rate": successful_requests / total_requests,
         "avg_latency": avg_latency,
         "avg_tokens_per_second": avg_tokens_per_second,
+        "p50_latency": p50_latency,
+        "p90_latency": p90_latency,
+        "p99_latency": p99_latency,
+        "throughput": throughput,
         "total_requests": total_requests,
         "successful_requests": successful_requests
     }
@@ -93,7 +109,6 @@ def run_tests(config_handler, output_dir):
         
         # Initialize mock testers
         tester = MockLLMTester(model_config)
-        llmperf_runner = MockLLMPerfRunner(model_config)
         
         model_results = {
             "model_name": model_name,
@@ -113,21 +128,13 @@ def run_tests(config_handler, output_dir):
             for concurrency in concurrency_levels:
                 print(f"\nConcurrency level: {concurrency}")
                 
-                # Run test with MockLLMTester
+                # Run test once with MockLLMTester
                 results = tester.run_test(test, concurrency, total_requests)
-                
-                # Run test with MockLLMPerfRunner
-                llmperf_results = llmperf_runner.run_benchmark(
-                    test["input"], 
-                    concurrency, 
-                    total_requests
-                )
                 
                 # Combine results
                 concurrency_result = {
                     "concurrency": concurrency,
                     "request_results": results,
-                    "llmperf_results": llmperf_results,
                     "summary": calculate_summary(results)
                 }
                 

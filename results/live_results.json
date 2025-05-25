@@ -34,71 +34,63 @@
               "request_results": [
                 {
                   "success": true,
-                  "latency": 1.7613632678985596,
+                  "latency": 0.6127000000000001,
                   "input_tokens": 14,
-                  "output_tokens": 152,
-                  "tokens_per_second": 86.29679224623979,
-                  "response_text": "Machine learning is a branch of artificial intelligence that involves the development of algorithms and statistical models that allow computers to learn and improve from experience without being explicitly programmed. By analyzing and identifying patterns in large amounts of data, machine learning algorithms can make predictions, decisions, and recommendations based on this information. This technology is used in a wide range of applications, such as natural language processing, image recognition, and predictive analytics, to automate tasks and provide valuable insights to businesses and organizations.",
+                  "output_tokens": 100,
+                  "tokens_per_second": 163.2120124041129,
                   "test_name": "short_prompt",
-                  "request_id": 0
+                  "request_id": 0,
+                  "response_text": "Mock response for test short_prompt, request 0"
                 },
                 {
                   "success": true,
-                  "latency": 1.210582971572876,
+                  "latency": 0.6127000000000001,
                   "input_tokens": 14,
-                  "output_tokens": 154,
-                  "tokens_per_second": 127.21143747785597,
-                  "response_text": "Machine learning is a branch of artificial intelligence that involves developing algorithms and statistical models that allow computers to learn from and make predictions or decisions based on data. Instead of being explicitly programmed to perform a specific task, machine learning algorithms use patterns and insights from data to improve their performance over time. By analyzing large amounts of data, machines can identify trends, patterns, and correlations that humans may not be able to see, ultimately enabling them to make more accurate predictions and decisions without being explicitly programmed to do so.",
+                  "output_tokens": 100,
+                  "tokens_per_second": 163.2120124041129,
                   "test_name": "short_prompt",
-                  "request_id": 1
+                  "request_id": 1,
+                  "response_text": "Mock response for test short_prompt, request 1"
                 },
                 {
                   "success": true,
-                  "latency": 1.1414737701416016,
+                  "latency": 0.6127000000000001,
                   "input_tokens": 14,
-                  "output_tokens": 168,
-                  "tokens_per_second": 147.17815195977684,
-                  "response_text": "Machine learning is a type of artificial intelligence that allows computers to learn and improve from experience without being explicitly programmed. It involves the use of algorithms and statistical models to analyze and interpret data, identify patterns, and make decisions or predictions. By continuously refining their algorithms based on new data, machine learning systems can evolve and adapt to new information, ultimately becoming increasingly accurate and efficient at performing specific tasks. This technology is being used in a wide range of applications, from recommendation systems and image recognition to natural language processing and autonomous vehicles.",
+                  "output_tokens": 100,
+                  "tokens_per_second": 163.2120124041129,
                   "test_name": "short_prompt",
-                  "request_id": 2
+                  "request_id": 2,
+                  "response_text": "Mock response for test short_prompt, request 2"
                 },
                 {
                   "success": true,
-                  "latency": 1.8722777366638184,
+                  "latency": 0.6127000000000001,
                   "input_tokens": 14,
-                  "output_tokens": 166,
-                  "tokens_per_second": 88.66205945267113,
-                  "response_text": "Machine learning is a branch of artificial intelligence that involves the use of algorithms and statistical models to enable computers to learn from and make predictions or decisions based on data without being explicitly programmed. By analyzing and identifying patterns in large amounts of data, machine learning algorithms can improve their performance over time and make increasingly accurate predictions or decisions. This technology is being used in a wide range of applications, from speech recognition and image classification to recommendation systems and autonomous vehicles, revolutionizing industries and transforming the way we interact with technology.",
+                  "output_tokens": 100,
+                  "tokens_per_second": 163.2120124041129,
                   "test_name": "short_prompt",
-                  "request_id": 3
+                  "request_id": 3,
+                  "response_text": "Mock response for test short_prompt, request 3"
                 },
                 {
                   "success": true,
-                  "latency": 2.3386905193328857,
+                  "latency": 0.6127000000000001,
                   "input_tokens": 14,
-                  "output_tokens": 185,
-                  "tokens_per_second": 79.10409627553948,
-                  "response_text": "Machine learning is a branch of artificial intelligence that involves creating algorithms and models that can learn from and make predictions or decisions based on data. Essentially, it is a process where machines are trained to recognize patterns and make decisions or predictions without being explicitly programmed to do so. By analyzing large amounts of data, machine learning algorithms can identify trends and patterns, allowing them to improve their performance over time. This technology is used in a wide range of applications, such as image and speech recognition, recommendation systems, and predictive analytics, and has the potential to revolutionize industries by enabling machines to automate tasks and make informed decisions.",
+                  "output_tokens": 100,
+                  "tokens_per_second": 163.2120124041129,
                   "test_name": "short_prompt",
-                  "request_id": 4
+                  "request_id": 4,
+                  "response_text": "Mock response for test short_prompt, request 4"
                 }
               ],
-              "llmperf_results": {
-                "success": true,
-                "throughput": 0.5007237524388218,
-                "avg_latency": 1.9971091747283936,
-                "p50_latency": 1.3401236534118652,
-                "p90_latency": 4.68661093711853,
-                "p99_latency": 4.68661093711853,
-                "tokens_per_second": 112.56341567755769,
-                "total_tokens": 843,
-                "successful_requests": 5,
-                "failed_requests": 0
-              },
               "summary": {
                 "success_rate": 1.0,
-                "avg_latency": 1.6648776531219482,
-                "avg_tokens_per_second": 105.69050748241663,
+                "avg_latency": 0.6127000000000001,
+                "avg_tokens_per_second": 163.2120124041129,
+                "p50_latency": 0.6127000000000001,
+                "p90_latency": 0.6127000000000001,
+                "p99_latency": 0.6127000000000001,
+                "throughput": 1.632120124041129,
                 "total_requests": 5,
                 "successful_requests": 5
               }
@@ -108,71 +100,63 @@
               "request_results": [
                 {
                   "success": true,
-                  "latency": 1.0285885334014893,
+                  "latency": 0.6684,
                   "input_tokens": 14,
-                  "output_tokens": 143,
-                  "tokens_per_second": 139.02546582655978,
-                  "response_text": "Machine learning is a branch of artificial intelligence that involves the development of algorithms and statistical models that enable computers to learn and improve from experience without being explicitly programmed. By analyzing and interpreting large amounts of data, machine learning algorithms can identify patterns, make predictions, and solve complex problems. This technology is used in various applications such as image and speech recognition, recommendation systems, and autonomous vehicles, and continues to advance and revolutionize industries across the globe.",
+                  "output_tokens": 100,
+                  "tokens_per_second": 149.61101137043687,
                   "test_name": "short_prompt",
-                  "request_id": 0
+                  "request_id": 0,
+                  "response_text": "Mock response for test short_prompt, request 0"
                 },
                 {
                   "success": true,
-                  "latency": 2.0639257431030273,
+                  "latency": 0.6684,
                   "input_tokens": 14,
-                  "output_tokens": 174,
-                  "tokens_per_second": 84.30535865035444,
-                  "response_text": "Machine learning is a branch of artificial intelligence that involves the development of algorithms and models that enable computers to learn from and make predictions or decisions based on data, without being explicitly programmed to do so. Through the use of statistical techniques, machine learning algorithms can automatically identify patterns, trends, and relationships within large datasets, allowing machines to continuously improve their performance and make more accurate predictions over time. This technology has applications in a wide range of industries, from healthcare and finance to marketing and transportation, and is revolutionizing the way businesses operate and make decisions.",
+                  "output_tokens": 100,
+                  "tokens_per_second": 149.61101137043687,
                   "test_name": "short_prompt",
-                  "request_id": 1
+                  "request_id": 1,
+                  "response_text": "Mock response for test short_prompt, request 1"
                 },
                 {
                   "success": true,
-                  "latency": 2.1114070415496826,
+                  "latency": 0.6684,
                   "input_tokens": 14,
-                  "output_tokens": 175,
-                  "tokens_per_second": 82.88311848745066,
-                  "response_text": "Machine learning is a subset of artificial intelligence that involves the development of algorithms and statistical models that enable computers to learn from and make predictions or decisions based on data. Instead of being explicitly programmed to perform a specific task, machine learning systems use patterns and inference to improve their performance over time. By analyzing and processing large amounts of data, these systems can identify trends, patterns, and insights that would be difficult or impossible for humans to uncover on their own. Machine learning is used in a wide range of applications, from recommendation systems and image recognition to medical diagnosis and autonomous vehicles.",
+                  "output_tokens": 100,
+                  "tokens_per_second": 149.61101137043687,
                   "test_name": "short_prompt",
-                  "request_id": 2
+                  "request_id": 2,
+                  "response_text": "Mock response for test short_prompt, request 2"
                 },
                 {
                   "success": true,
-                  "latency": 1.364302396774292,
+                  "latency": 0.6684,
                   "input_tokens": 14,
-                  "output_tokens": 162,
-                  "tokens_per_second": 118.74200351991394,
-                  "response_text": "Machine learning is a subset of artificial intelligence that involves the use of algorithms and statistical models to enable computers to learn from and make predictions or decisions based on data without being explicitly programmed to do so. By analyzing and identifying patterns in large amounts of data, machine learning algorithms can improve their performance over time and adapt to new information. This technology is used in a wide range of applications, from self-driving cars and virtual assistants to fraud detection and personalized recommendations, revolutionizing how we approach problem-solving and decision-making in various industries.",
+                  "output_tokens": 100,
+                  "tokens_per_second": 149.61101137043687,
                   "test_name": "short_prompt",
-                  "request_id": 3
+                  "request_id": 3,
+                  "response_text": "Mock response for test short_prompt, request 3"
                 },
                 {
                   "success": true,
-                  "latency": 1.1448094844818115,
+                  "latency": 0.6684,
                   "input_tokens": 14,
-                  "output_tokens": 154,
-                  "tokens_per_second": 134.52019928862384,
-                  "response_text": "Machine learning is a subset of artificial intelligence that involves developing algorithms and statistical models that enable computers to learn and improve from experience without being explicitly programmed. By analyzing and interpreting large amounts of data, machine learning algorithms can identify patterns, make predictions, and automate decision-making processes. Through a feedback loop of learning and adjustment, machines can continuously improve their performance and accuracy, making them increasingly capable of handling complex tasks and solving problems in a wide range of industries and applications.",
+                  "output_tokens": 100,
+                  "tokens_per_second": 149.61101137043687,
                   "test_name": "short_prompt",
-                  "request_id": 4
+                  "request_id": 4,
+                  "response_text": "Mock response for test short_prompt, request 4"
                 }
               ],
-              "llmperf_results": {
-                "success": true,
-                "throughput": 0.653831770397909,
-                "avg_latency": 1.5294454097747803,
-                "p50_latency": 1.3310985565185547,
-                "p90_latency": 2.5186519622802734,
-                "p99_latency": 2.5186519622802734,
-                "tokens_per_second": 113.9118916978598,
-                "total_tokens": 824,
-                "successful_requests": 5,
-                "failed_requests": 0
-              },
               "summary": {
                 "success_rate": 1.0,
-                "avg_latency": 1.5426066398620606,
-                "avg_tokens_per_second": 111.89522915458053,
+                "avg_latency": 0.6684,
+                "avg_tokens_per_second": 149.61101137043687,
+                "p50_latency": 0.6684,
+                "p90_latency": 0.6684,
+                "p99_latency": 0.6684,
+                "throughput": 1.4961101137043686,
                 "total_requests": 5,
                 "successful_requests": 5
               }
@@ -187,71 +171,63 @@
               "request_results": [
                 {
                   "success": true,
-                  "latency": 6.219228029251099,
+                  "latency": 0.6325,
                   "input_tokens": 18,
-                  "output_tokens": 556,
-                  "tokens_per_second": 89.40016307248214,
-                  "response_text": "Artificial intelligence (AI) has become increasingly prevalent in society, impacting various aspects of our daily lives. From virtual assistants like Siri and Alexa to self-driving cars and smart home devices, AI has revolutionized the way we interact with technology.\n\nOne of the most significant impacts of AI on society is its ability to streamline processes and increase efficiency. AI-powered algorithms can analyze vast amounts of data at a speed and accuracy that far surpasses human capabilities. This has led to advancements in various industries, such as healthcare, finance, and transportation, where AI is used to improve diagnosis and treatment, optimize investment strategies, and enhance logistics and supply chain management.\n\nHowever, the widespread adoption of AI has also raised concerns about its potential negative impacts on society. One major concern is the displacement of jobs due to automation. As AI becomes more advanced, more tasks traditionally performed by humans are being taken over by machines. This has led to fears of widespread unemployment and economic inequality.\n\nAnother concern is the ethical implications of AI, particularly in regards to privacy and security. AI-powered systems collect and analyze vast amounts of personal data, raising concerns about data privacy and potential misuse of information. Additionally, the use of AI in decision-making processes, such as in criminal justice or hiring practices, raises questions about bias and fairness.\n\nDespite these challenges, AI has the potential to bring about significant benefits to society. It can help us tackle complex problems, improve decision-making, and enhance our quality of life. However, it is essential that we address the ethical, social, and economic implications of AI to ensure that its impact on society is positive and inclusive.\n\nIn conclusion, artificial intelligence has the power to transform society in profound ways. It is crucial that we approach the development and deployment of AI with caution and consideration for its potential impacts on individuals and communities. By addressing the challenges and harnessing the opportunities presented by AI, we can ensure that it benefits society as a whole.",
+                  "output_tokens": 300,
+                  "tokens_per_second": 474.30830039525694,
                   "test_name": "medium_prompt",
-                  "request_id": 0
+                  "request_id": 0,
+                  "response_text": "Mock response for test medium_prompt, request 0"
                 },
                 {
                   "success": true,
-                  "latency": 4.062631845474243,
+                  "latency": 0.6325,
                   "input_tokens": 18,
-                  "output_tokens": 526,
-                  "tokens_per_second": 129.47272113419828,
-                  "response_text": "Artificial intelligence (AI) has had a profound impact on society in recent years, influencing various aspects of our daily lives. From self-driving cars to virtual assistants, AI technology has revolutionized the way we live, work, and communicate.\n\nOne of the most significant impacts of AI on society is its effect on the job market. With the rise of automation and machine learning, many traditional jobs are being replaced by AI-powered technologies. While this can lead to increased efficiency and productivity, it also raises concerns about job displacement and income inequality. As AI continues to advance, it is essential for society to adapt and evolve to ensure that all individuals have access to meaningful employment opportunities.\n\nAI has also transformed the healthcare industry, with machine learning algorithms being used to analyze medical images, predict disease outbreaks, and personalize treatment plans. By harnessing the power of AI, healthcare professionals can provide more accurate diagnoses and improve patient outcomes. However, concerns about data privacy and security have also emerged, highlighting the need for ethical guidelines and regulations to govern the use of AI in healthcare.\n\nIn addition to healthcare and the job market, AI has also impacted how we interact with technology and the world around us. Virtual assistants like Siri and Alexa have become integral parts of our daily routines, helping us manage our schedules, answer questions, and control smart devices in our homes. As AI technology continues to advance, we can expect to see even more sophisticated applications that will further enhance our lives and transform the way we experience the world.\n\nOverall, the impact of artificial intelligence on society is undeniable. While AI has the potential to revolutionize industries and improve quality of life, it also raises ethical, social, and economic challenges that must be addressed. By embracing AI technology responsibly and ethically, we can harness its power to create a more connected, efficient, and innovative society for future generations.",
+                  "output_tokens": 300,
+                  "tokens_per_second": 474.30830039525694,
                   "test_name": "medium_prompt",
-                  "request_id": 1
+                  "request_id": 1,
+                  "response_text": "Mock response for test medium_prompt, request 1"
                 },
                 {
                   "success": true,
-                  "latency": 5.32224702835083,
+                  "latency": 0.6325,
                   "input_tokens": 18,
-                  "output_tokens": 482,
-                  "tokens_per_second": 90.56325221893246,
-                  "response_text": "Artificial intelligence (AI) has had a profound impact on society in recent years, revolutionizing various industries and changing the way we live and work. From virtual assistants like Siri and Alexa to self-driving cars and advanced medical diagnostics, AI has the potential to transform the world in ways we never thought possible.\n\nOne of the biggest impacts of AI on society is its ability to automate tasks that were once done by humans. This has led to increased efficiency and productivity in many industries, but it has also raised concerns about job loss and the future of work. As AI continues to advance, it is likely that many traditional jobs will be replaced by machines, leading to a shift in the job market and potentially widening the gap between the wealthy and the working class.\n\nAnother impact of AI on society is its potential to improve healthcare outcomes. AI-powered diagnostic tools can analyze medical images and patient data with greater accuracy and speed than human doctors, leading to earlier detection of diseases and more personalized treatment plans. However, there are also ethical concerns surrounding the use of AI in healthcare, such as data privacy and the potential for bias in algorithms.\n\nAI also has the potential to revolutionize transportation, with self-driving cars promising to reduce accidents and congestion on the roads. However, there are still many challenges to overcome before autonomous vehicles can become widespread, such as regulatory hurdles and public acceptance.\n\nOverall, the impact of AI on society is complex and multifaceted. While AI has the potential to improve our lives in many ways, it also poses challenges and risks that must be carefully considered. As we continue to develop and integrate AI into our daily lives, it is important to prioritize ethical considerations and ensure that these technologies are used for the benefit of all members of society.",
+                  "output_tokens": 300,
+                  "tokens_per_second": 474.30830039525694,
                   "test_name": "medium_prompt",
-                  "request_id": 2
+                  "request_id": 2,
+                  "response_text": "Mock response for test medium_prompt, request 2"
                 },
                 {
                   "success": true,
-                  "latency": 3.2666831016540527,
+                  "latency": 0.6325,
                   "input_tokens": 18,
-                  "output_tokens": 519,
-                  "tokens_per_second": 158.8767516926296,
-                  "response_text": "Artificial intelligence (AI) has undoubtedly revolutionized the way we live, work, and communicate in society. From self-driving cars to personalized recommendations on streaming services, AI is becoming increasingly integrated into our daily lives. While the benefits of AI are numerous, its impact on society is complex and multifaceted.\n\nOne of the most significant impacts of AI on society is the transformation of the workforce. As AI technology continues to advance, many jobs that were once performed by humans are now being automated. This has raised concerns about job displacement and the need for reskilling and upskilling of the workforce. On the other hand, AI has also created new job opportunities in fields such as data science, machine learning, and AI research.\n\nAI has also had a profound impact on healthcare. AI-powered tools and algorithms are being used to diagnose diseases, personalize treatment plans, and improve patient outcomes. This has the potential to revolutionize the healthcare industry and save countless lives. However, concerns about data privacy and security have also been raised, as AI systems rely on vast amounts of personal data to function effectively.\n\nIn the realm of education, AI has the potential to personalize learning experiences for students and improve educational outcomes. AI-powered tools can analyze student performance data, identify areas for improvement, and provide targeted support. However, there are also concerns about the ethical implications of using AI in education, such as bias in algorithms and the potential for data misuse.\n\nIn conclusion, the impact of artificial intelligence on society is profound and far-reaching. While AI has the potential to improve efficiency, productivity, and quality of life, it also poses challenges in terms of job displacement, data privacy, and ethical considerations. As we continue to navigate the complex landscape of AI technology, it is important to consider the implications for society and work towards creating a future where AI benefits all members of society.",
+                  "output_tokens": 300,
+                  "tokens_per_second": 474.30830039525694,
                   "test_name": "medium_prompt",
-                  "request_id": 3
+                  "request_id": 3,
+                  "response_text": "Mock response for test medium_prompt, request 3"
                 },
                 {
                   "success": true,
-                  "latency": 3.4372053146362305,
+                  "latency": 0.6325,
                   "input_tokens": 18,
-                  "output_tokens": 539,
-                  "tokens_per_second": 156.81344309135167,
-                  "response_text": "Artificial intelligence (AI) has become an integral part of our society, with its impact being felt across various sectors such as healthcare, education, finance, and transportation. The advancements in AI technology have led to increased efficiency, productivity, and innovation in many industries. However, there are also concerns about the potential negative impact of AI on society.\n\nOne of the main concerns about AI is the potential loss of jobs due to automation. As AI technology continues to advance, many tasks that were previously performed by humans are now being done by machines. This has led to fears of mass unemployment and income inequality. However, proponents of AI argue that it can also create new job opportunities and lead to the creation of new industries.\n\nAnother concern about AI is its potential to perpetuate biases and discrimination. AI algorithms are often trained on biased data, which can lead to discriminatory outcomes in decision-making processes. For example, AI-powered hiring tools have been found to favor certain demographics over others, leading to a lack of diversity in the workplace. It is important for developers to address these biases and ensure that AI systems are fair and transparent.\n\nOn the other hand, AI has the potential to revolutionize healthcare by improving diagnostic accuracy, personalizing treatment plans, and streamlining administrative tasks. AI-powered chatbots and virtual assistants are also being used to provide mental health support and counseling services. In education, AI technology can help personalize learning experiences for students and provide teachers with valuable insights into student performance.\n\nOverall, the impact of AI on society is complex and multifaceted. While it has the potential to bring about significant benefits, such as increased efficiency and innovation, it also poses challenges in terms of job displacement, bias, and privacy concerns. It is crucial for policymakers, developers, and society at large to work together to ensure that AI is developed and deployed responsibly and ethically to maximize its benefits while minimizing its potential harms.",
+                  "output_tokens": 300,
+                  "tokens_per_second": 474.30830039525694,
                   "test_name": "medium_prompt",
-                  "request_id": 4
+                  "request_id": 4,
+                  "response_text": "Mock response for test medium_prompt, request 4"
                 }
               ],
-              "llmperf_results": {
-                "success": true,
-                "throughput": 0.2805520623610393,
-                "avg_latency": 3.564400815963745,
-                "p50_latency": 3.027158498764038,
-                "p90_latency": 5.936485290527344,
-                "p99_latency": 5.936485290527344,
-                "tokens_per_second": 154.99420557569056,
-                "total_tokens": 2603,
-                "successful_requests": 5,
-                "failed_requests": 0
-              },
               "summary": {
                 "success_rate": 1.0,
-                "avg_latency": 4.461599063873291,
-                "avg_tokens_per_second": 125.02526624191883,
+                "avg_latency": 0.6325,
+                "avg_tokens_per_second": 474.3083003952569,
+                "p50_latency": 0.6325,
+                "p90_latency": 0.6325,
+                "p99_latency": 0.6325,
+                "throughput": 1.58102766798419,
                 "total_requests": 5,
                 "successful_requests": 5
               }
@@ -261,71 +237,63 @@
               "request_results": [
                 {
                   "success": true,
-                  "latency": 3.177062511444092,
+                  "latency": 0.69,
                   "input_tokens": 18,
-                  "output_tokens": 506,
-                  "tokens_per_second": 159.26661756806428,
-                  "response_text": "Artificial intelligence (AI) has become an integral part of modern society, revolutionizing various industries and transforming the way we live and work. From self-driving cars to virtual assistants, AI technology has permeated almost every aspect of our daily lives, offering numerous benefits and opportunities for innovation.\n\nOne of the most significant impacts of AI on society is its role in automation. AI-powered machines and systems have the ability to perform tasks that were once thought to be exclusive to humans, such as data analysis, pattern recognition, and decision-making. This has led to increased efficiency and productivity in industries like manufacturing, healthcare, and finance, but it has also raised concerns about job displacement and the future of work.\n\nAdditionally, AI has the potential to improve healthcare outcomes through predictive analytics, personalized treatment plans, and early disease detection. AI-powered algorithms can analyze vast amounts of medical data to identify patterns and trends that may not be apparent to human physicians, leading to more accurate diagnoses and better patient care.\n\nOn the other hand, there are also ethical and social implications of AI that need to be considered. Issues such as bias in AI algorithms, privacy concerns, and the potential for misuse of AI technology raise important questions about the impact of AI on society. It is crucial for policymakers, researchers, and industry leaders to address these challenges and ensure that AI is developed and deployed in a responsible and ethical manner.\n\nIn conclusion, the impact of artificial intelligence on society is profound and multifaceted. While AI has the potential to bring about significant advancements in various fields, it also presents challenges that need to be addressed. As we continue to integrate AI technology into our daily lives, it is essential to consider the ethical, social, and economic implications of AI and work towards creating a society where AI benefits everyone.",
+                  "output_tokens": 300,
+                  "tokens_per_second": 434.7826086956522,
                   "test_name": "medium_prompt",
-                  "request_id": 0
+                  "request_id": 0,
+                  "response_text": "Mock response for test medium_prompt, request 0"
                 },
                 {
                   "success": true,
-                  "latency": 4.562063217163086,
+                  "latency": 0.69,
                   "input_tokens": 18,
-                  "output_tokens": 477,
-                  "tokens_per_second": 104.55795487564987,
-                  "response_text": "Artificial intelligence is revolutionizing the way we live, work, and interact with the world around us. Its impact on society is profound and far-reaching, with both positive and negative consequences.\n\nOne of the most significant impacts of AI on society is its ability to automate tasks that were previously done by humans. This has led to increased efficiency and productivity in many industries, but it has also raised concerns about job displacement and the future of work. As AI becomes more advanced, it has the potential to replace not only manual labor but also white-collar jobs, leading to widespread unemployment and economic instability.\n\nAI also has the potential to improve healthcare outcomes by analyzing vast amounts of data to identify patterns and trends that can help diagnose diseases and develop personalized treatment plans. It can also enhance education by providing personalized learning experiences for students and helping teachers identify areas where students may need extra support.\n\nHowever, the use of AI also raises ethical concerns, such as privacy, bias, and accountability. AI algorithms are only as good as the data they are trained on, and if that data is biased or incomplete, it can lead to discriminatory outcomes. There is also the risk of AI being used for malicious purposes, such as surveillance, misinformation, and even autonomous weapons.\n\nIn conclusion, the impact of artificial intelligence on society is complex and multifaceted. While it has the potential to bring about significant benefits, such as increased efficiency, improved healthcare, and personalized education, it also poses challenges in terms of job displacement, ethical concerns, and societal implications. It is essential for policymakers, businesses, and individuals to navigate these challenges carefully and thoughtfully to ensure that AI is used for the betterment of society as a whole.",
+                  "output_tokens": 300,
+                  "tokens_per_second": 434.7826086956522,
                   "test_name": "medium_prompt",
-                  "request_id": 1
+                  "request_id": 1,
+                  "response_text": "Mock response for test medium_prompt, request 1"
                 },
                 {
                   "success": true,
-                  "latency": 4.201891183853149,
+                  "latency": 0.69,
                   "input_tokens": 18,
-                  "output_tokens": 522,
-                  "tokens_per_second": 124.22977586995104,
-                  "response_text": "Artificial intelligence (AI) has become increasingly prevalent in our society, impacting various aspects of our daily lives. From virtual assistants like Siri and Alexa to self-driving cars and advanced medical diagnostics, AI has the potential to revolutionize how we live, work, and interact with the world around us.\n\nOne major impact of AI on society is its influence on the job market. As AI technology becomes more advanced, it has the potential to automate many routine tasks currently performed by humans. This could lead to job displacement in certain industries, but also create new opportunities in fields related to AI development and maintenance. It is crucial for society to adapt and provide adequate training and education for individuals to thrive in this changing job landscape.\n\nAI also has the potential to improve efficiency and productivity in various sectors, such as healthcare, finance, and transportation. For example, AI-powered medical diagnostics can help doctors make more accurate diagnoses and treatment plans, while AI algorithms in finance can analyze vast amounts of data to make better investment decisions. In transportation, self-driving cars have the potential to reduce accidents and increase mobility for individuals who are unable to drive.\n\nHowever, AI also raises ethical and privacy concerns. As AI algorithms become more sophisticated, there is a risk of bias and discrimination in decision-making processes. Additionally, the collection and use of personal data by AI systems raise concerns about privacy and security. It is essential for society to establish regulations and ethical guidelines to ensure the responsible development and use of AI technology.\n\nIn conclusion, the impact of artificial intelligence on society is profound and multifaceted. While AI has the potential to bring about significant advancements and improvements in various aspects of our lives, it also poses challenges that must be addressed. It is crucial for society to embrace AI technology responsibly and ethically, ensuring that it benefits humanity as a whole.",
+                  "output_tokens": 300,
+                  "tokens_per_second": 434.7826086956522,
                   "test_name": "medium_prompt",
-                  "request_id": 2
+                  "request_id": 2,
+                  "response_text": "Mock response for test medium_prompt, request 2"
                 },
                 {
                   "success": true,
-                  "latency": 2.827704668045044,
+                  "latency": 0.69,
                   "input_tokens": 18,
-                  "output_tokens": 450,
-                  "tokens_per_second": 159.13967433915616,
-                  "response_text": "Artificial intelligence (AI) has had a profound impact on society in recent years, revolutionizing the way we live, work, and interact with each other. From voice assistants like Siri and Alexa to self-driving cars and predictive analytics, AI is increasingly becoming a ubiquitous part of our daily lives.\n\nOne of the most significant ways AI is impacting society is through automation. AI-powered robots and machines are being used to perform tasks that were once done by humans, leading to increased efficiency and productivity in various industries. However, this also raises concerns about job displacement and the widening gap between those with the skills to work alongside AI and those without.\n\nAI is also transforming the way we access information and make decisions. AI algorithms are being used to personalize our online experiences, from recommending products to predicting what news articles we will find interesting. This has raised concerns about privacy and the potential for AI to reinforce biases and echo chambers.\n\nIn healthcare, AI is being used to analyze medical images, diagnose diseases, and even develop new drugs. This has the potential to revolutionize healthcare and improve patient outcomes, but it also raises ethical questions about data privacy and the potential for AI to replace human doctors.\n\nOverall, the impact of AI on society is complex and multifaceted. While AI has the potential to bring about significant benefits in terms of efficiency, productivity, and innovation, it also raises concerns about job displacement, privacy, and ethical implications. As AI continues to advance and become more integrated into our lives, it is crucial for society to address these challenges and ensure that AI is used responsibly and ethically for the betterment of all.",
+                  "output_tokens": 300,
+                  "tokens_per_second": 434.7826086956522,
                   "test_name": "medium_prompt",
-                  "request_id": 3
+                  "request_id": 3,
+                  "response_text": "Mock response for test medium_prompt, request 3"
                 },
                 {
                   "success": true,
-                  "latency": 3.4278037548065186,
+                  "latency": 0.69,
                   "input_tokens": 18,
-                  "output_tokens": 504,
-                  "tokens_per_second": 147.032921383928,
-                  "response_text": "Artificial intelligence (AI) has become an increasingly prominent and impactful force in society today. From virtual assistants like Siri and Alexa to self-driving cars and automated customer service, AI has the potential to revolutionize how we live and work. While AI offers many benefits, such as increased efficiency and convenience, it also raises important ethical, social, and economic concerns.\n\nOne of the most significant impacts of AI on society is the potential for job displacement. As AI technology becomes more advanced, many fear that it will replace human workers in a variety of industries, leading to mass unemployment and economic instability. This has sparked debates about the need for retraining and reskilling programs to help workers adapt to a changing job market.\n\nAI also raises ethical concerns, particularly in regards to privacy and surveillance. As AI systems become more sophisticated, they have the ability to collect and analyze vast amounts of data about individuals, raising questions about who has access to this data and how it is used. There are also concerns about bias and discrimination in AI algorithms, as they are often trained on biased data sets that can perpetuate existing inequalities.\n\nOn the other hand, AI has the potential to improve our quality of life in many ways. For example, AI-powered medical diagnostics can help doctors make more accurate diagnoses and develop personalized treatment plans. Autonomous vehicles have the potential to reduce traffic accidents and improve transportation efficiency. AI can also enhance our ability to predict natural disasters and respond to emergencies more effectively.\n\nOverall, the impact of AI on society is multifaceted and complex. While AI has the potential to bring about significant benefits, it also presents challenges that must be addressed. As we continue to develop and implement AI technology, it is essential that we consider its ethical implications and work to ensure that it benefits society as a whole.",
+                  "output_tokens": 300,
+                  "tokens_per_second": 434.7826086956522,
                   "test_name": "medium_prompt",
-                  "request_id": 4
+                  "request_id": 4,
+                  "response_text": "Mock response for test medium_prompt, request 4"
                 }
               ],
-              "llmperf_results": {
-                "success": true,
-                "throughput": 0.22447084485986607,
-                "avg_latency": 4.454921531677246,
-                "p50_latency": 4.294132471084595,
-                "p90_latency": 6.254838228225708,
-                "p99_latency": 6.254838228225708,
-                "tokens_per_second": 136.74368625761448,
-                "total_tokens": 2942,
-                "successful_requests": 5,
-                "failed_requests": 0
-              },
               "summary": {
                 "success_rate": 1.0,
-                "avg_latency": 3.639305067062378,
-                "avg_tokens_per_second": 138.84538880734985,
+                "avg_latency": 0.69,
+                "avg_tokens_per_second": 434.7826086956522,
+                "p50_latency": 0.69,
+                "p90_latency": 0.69,
+                "p99_latency": 0.69,
+                "throughput": 1.4492753623188408,
                 "total_requests": 5,
                 "successful_requests": 5
               }
