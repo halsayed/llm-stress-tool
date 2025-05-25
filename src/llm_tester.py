@@ -1,8 +1,10 @@
 import json
 import time
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 import requests
 from tqdm import tqdm
+import ray
+from .ray_requests import make_request
 
 
 class LLMTester:
@@ -116,21 +118,22 @@ class LLMTester:
         
         results = []
         
-        # Simple implementation of concurrent requests
-        # In a production environment, use asyncio or threading for true concurrency
+        if not ray.is_initialized():
+            ray.init(ignore_reinit_error=True)
+
         with tqdm(total=total_requests, desc=f"Test: {test_name}") as pbar:
-            for i in range(0, total_requests, concurrency):
-                batch_size = min(concurrency, total_requests - i)
-                batch_results = []
-                
-                # Simulate concurrent requests
-                for j in range(batch_size):
-                    result = self._make_request(prompt)
-                    result['test_name'] = test_name
-                    result['request_id'] = i + j
-                    batch_results.append(result)
-                
-                results.extend(batch_results)
-                pbar.update(batch_size)
-        
+            pending = []
+            for request_id in range(total_requests):
+                pending.append((request_id, make_request.remote(self.base_url, self.headers, self.model_name, prompt)))
+
+                if len(pending) == concurrency or request_id == total_requests - 1:
+                    ids, refs = zip(*pending)
+                    batch_results = ray.get(list(refs))
+                    for rid, res in zip(ids, batch_results):
+                        res["test_name"] = test_name
+                        res["request_id"] = rid
+                    results.extend(batch_results)
+                    pbar.update(len(batch_results))
+                    pending = []
+
         return results

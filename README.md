@@ -3,12 +3,13 @@
 ## Overview
 
 This tool allows you to benchmark the performance of LLM endpoints using the OpenAI API format. It measures key metrics such as tokens/second, latency, and throughput under various load conditions.
+Concurrent requests are executed using Ray tasks running on your local machine, so you don't need a separate Ray cluster.
 
 ## Features
 
 - Test multiple LLM models with different parameters (model_name, base_url, api_key)
 - Define custom input and output tests
-- Configure concurrent request levels
+- Configure concurrent request levels executed via Ray tasks
 - Generate detailed performance reports with visualizations
 - Export results to JSON and Word formats
 - Optional automated analysis of performance metrics

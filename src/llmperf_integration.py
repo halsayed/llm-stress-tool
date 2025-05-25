@@ -1,9 +1,11 @@
 import json
 import os
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 import requests
 import time
 from tqdm import tqdm
+import ray
+from .ray_requests import make_request
 
 # Remove the dependency on llmperf.benchmark
 class LLMPerfRunner:
@@ -118,31 +120,29 @@ class LLMPerfRunner:
         total_tokens = 0
         successful_requests = 0
         failed_requests = 0
-        
-        # Simple implementation of concurrent requests
-        # In a production environment, use asyncio or threading for true concurrency
+
+        if not ray.is_initialized():
+            ray.init(ignore_reinit_error=True)
+
         with tqdm(total=total_requests, desc=f"Benchmark") as pbar:
-            for i in range(0, total_requests, concurrency):
-                batch_size = min(concurrency, total_requests - i)
-                batch_results = []
-                
-                # Simulate concurrent requests
-                for j in range(batch_size):
-                    result = self._make_request(prompt)
-                    batch_results.append(result)
-                
-                # Process batch results
-                for result in batch_results:
-                    if result.get("success", False):
-                        latencies.append(result["latency"])
-                        tokens_per_second_values.append(result.get("tokens_per_second", 0))
-                        total_tokens += result.get("output_tokens", 0)
-                        successful_requests += 1
-                    else:
-                        failed_requests += 1
-                
-                results.extend(batch_results)
-                pbar.update(batch_size)
+            pending = []
+            for _ in range(total_requests):
+                pending.append(make_request.remote(self.base_url, self.headers, self.model_name, prompt))
+
+                if len(pending) == concurrency or len(results) + len(pending) == total_requests:
+                    batch_results = ray.get(pending)
+                    pending = []
+                    for result in batch_results:
+                        if result.get("success", False):
+                            latencies.append(result["latency"])
+                            tokens_per_second_values.append(result.get("tokens_per_second", 0))
+                            total_tokens += result.get("output_tokens", 0)
+                            successful_requests += 1
+                        else:
+                            failed_requests += 1
+
+                    results.extend(batch_results)
+                    pbar.update(len(batch_results))
         
         # Calculate metrics
         if successful_requests > 0:
