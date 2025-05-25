@@ -27,6 +27,11 @@ class ReportGenerator:
         # Create charts directory if it doesn't exist
         if not os.path.exists(self.charts_dir):
             os.makedirs(self.charts_dir)
+
+    @staticmethod
+    def _sanitize_name(name: str) -> str:
+        """Sanitize a string so it can be safely used as a filename."""
+        return "".join(c if c.isalnum() or c in ("-", "_") else "_" for c in name)
     
     def generate_report(self) -> None:
         """
@@ -121,6 +126,7 @@ class ReportGenerator:
             model_result: Dictionary with model test results
         """
         model_name = model_result['model_name']
+        safe_model_name = self._sanitize_name(model_name)
         
         # Prepare data for charts
         latency_data = []
@@ -156,13 +162,13 @@ class ReportGenerator:
             'Latency', 
             'Test',
             f'Latency by Concurrency - {model_name}',
-            f'{self.charts_dir}/latency_{model_name.replace(" ", "_")}.png'
+            f'{self.charts_dir}/latency_{safe_model_name}.png'
         )
         
         # Add latency chart to document
         self.document.add_heading(f"Latency by Concurrency", level=3)
         self.document.add_picture(
-            f'{self.charts_dir}/latency_{model_name.replace(" ", "_")}.png', 
+            f'{self.charts_dir}/latency_{safe_model_name}.png',
             width=Inches(6.0)
         )
         
@@ -173,13 +179,13 @@ class ReportGenerator:
             'Tokens/s', 
             'Test',
             f'Tokens per Second by Concurrency - {model_name}',
-            f'{self.charts_dir}/tokens_{model_name.replace(" ", "_")}.png'
+            f'{self.charts_dir}/tokens_{safe_model_name}.png'
         )
         
         # Add tokens per second chart to document
         self.document.add_heading(f"Tokens per Second by Concurrency", level=3)
         self.document.add_picture(
-            f'{self.charts_dir}/tokens_{model_name.replace(" ", "_")}.png', 
+            f'{self.charts_dir}/tokens_{safe_model_name}.png',
             width=Inches(6.0)
         )
     
