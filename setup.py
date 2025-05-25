@@ -12,6 +12,7 @@ setup(
         "python-docx",
         "tqdm",
         "requests",
+        "aiohttp",
     ],
     entry_points={
         "console_scripts": [
