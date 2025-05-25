@@ -108,7 +108,7 @@ def run_tests(config_handler: ConfigHandler, output_dir: str) -> Dict[str, Any]:
                 concurrency_result = {
                     "concurrency": concurrency,
                     "request_results": results,
-                    "summary": calculate_summary(results)
+                    "summary": calculate_summary(results, concurrency)
                 }
                 
                 test_results["concurrency_results"].append(concurrency_result)
@@ -129,7 +129,7 @@ def run_tests(config_handler: ConfigHandler, output_dir: str) -> Dict[str, Any]:
     return all_results
 
 
-def calculate_summary(results: List[Dict[str, Any]]) -> Dict[str, Any]:
+def calculate_summary(results: List[Dict[str, Any]], concurrency: int) -> Dict[str, Any]:
     """
     Calculate summary statistics from test results.
     
@@ -169,6 +169,8 @@ def calculate_summary(results: List[Dict[str, Any]]) -> Dict[str, Any]:
     total_latency = sum(latencies)
     throughput = successful_requests / total_latency if total_latency > 0 else 0
 
+    total_system_throughput = avg_tokens_per_second * concurrency
+
     return {
         "success_rate": successful_requests / total_requests,
         "avg_latency": avg_latency,
@@ -177,6 +179,7 @@ def calculate_summary(results: List[Dict[str, Any]]) -> Dict[str, Any]:
         "p90_latency": p90_latency,
         "p99_latency": p99_latency,
         "throughput": throughput,
+        "total_system_throughput": total_system_throughput,
         "total_requests": total_requests,
         "successful_requests": successful_requests
     }

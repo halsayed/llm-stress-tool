@@ -38,7 +38,7 @@ def ensure_output_directory(output_dir):
         print(f"Created output directory: {output_dir}")
 
 
-def calculate_summary(results):
+def calculate_summary(results, concurrency):
     """Calculate summary statistics from test results."""
     successful_results = [r for r in results if r.get("success", False)]
     
@@ -69,6 +69,8 @@ def calculate_summary(results):
     total_latency = sum(latencies)
     throughput = successful_requests / total_latency if total_latency > 0 else 0
 
+    total_system_throughput = avg_tokens_per_second * concurrency
+
     return {
         "success_rate": successful_requests / total_requests,
         "avg_latency": avg_latency,
@@ -77,6 +79,7 @@ def calculate_summary(results):
         "p90_latency": p90_latency,
         "p99_latency": p99_latency,
         "throughput": throughput,
+        "total_system_throughput": total_system_throughput,
         "total_requests": total_requests,
         "successful_requests": successful_requests
     }
@@ -135,7 +138,7 @@ def run_tests(config_handler, output_dir):
                 concurrency_result = {
                     "concurrency": concurrency,
                     "request_results": results,
-                    "summary": calculate_summary(results)
+                    "summary": calculate_summary(results, concurrency)
                 }
                 
                 test_results["concurrency_results"].append(concurrency_result)
